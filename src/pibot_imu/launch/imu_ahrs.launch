@@ -1,0 +1,34 @@
+<launch>
+
+  <arg name="use_calibrate" default="true" doc="execute IMU self claibration"/>
+  <arg name="use_mag" default="false"  doc="use mag in pibot imu"/>
+  <arg name="use_madgwick" default="true"  doc="use madgwick filter in pibot imu"/>
+  
+  
+  <node pkg="pibot_imu" type="pibot_imu" name="pibot_imu" output="screen" respawn="false">   
+       <rosparam>
+            imu/accelerometer_bias: {x: 3.733221, y: -1.734520, z: -10.802275}
+            imu/gyroscope_bias: {x: -0.045090, y: 0.018580, z: 0.022377}
+        </rosparam>     
+        <param name="imu/use_mag_msg" value="$(arg use_mag)" />
+        <param name="imu/perform_calibration" value="$(arg use_calibrate)" />
+  </node>
+   
+  <!-- use madgwick imu filter -->    
+  <node if    ="$(arg use_madgwick)" pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_madgwick" output="screen" respawn="false" >
+        <param name="use_mag" value="$(arg use_mag)" />
+        <param name="publish_tf" value="false" />
+  </node>  
+      
+  <!-- use complementary imu filter -->
+  <node unless="$(arg use_madgwick)" pkg="imu_complementary_filter" type="complementary_filter_node" name="complementary_filter_gain_node" output="screen" respawn="false" >
+        <param name="do_bias_estimation" value="true"/>
+        <param name="do_adaptive_gain" value="true"/>
+        <param name="use_mag" value="$(arg use_mag)"/>
+        <param name="gain_acc" value="0.01"/>
+        <param name="gain_mag" value="0.01"/>
+        <param name="publish_debug_topics" value="false"/>
+        <param name="publish_tf" value="false"/>
+  </node>
+  
+</launch>
