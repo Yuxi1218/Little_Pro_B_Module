@@ -1,0 +1,17 @@
+<launch>
+
+  <include file="$(find ydlidar)/launch/X4_lidar.launch" />    
+  <include file="$(find pibot_bringup)/launch/bringup.launch" />   
+ 
+#  <arg name="map_file" default="/home/mini2/catkin_ws/maps/ai007.yaml"/>
+  
+#  <!-- Map server -->
+#  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
+
+  <!-- AMCL -->
+  <include file="/home/mini2/catkin_ws/launch/amcl.launch"/>
+  
+  <!-- node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop" output="screen"/ -->
+ 
+ </launch>
+    
