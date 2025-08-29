@@ -25,17 +25,17 @@ recovery_behaviors:
     - name: 'aggressive_reset'
       type: 'clear_costmap_recovery/ClearCostmapRecovery'
     
-    # - name: 'rotate_recovery'
-    #   type: 'rotate_recovery/RotateRecovery'
+    - name: 'rotate_recovery'
+      type: 'rotate_recovery/RotateRecovery'
     
 
 # === 清除範圍設定 ===
-conservative_reset:
-    reset_distance: 1.0      # 保守清除範圍（半徑 3.0 公尺）
-aggressive_reset:
-    reset_distance: 3.0      # 激進清除範圍（半徑 1.0 公尺）
+#conservative_reset:
+#    reset_distance: 1.0      # 保守清除範圍（半徑 3.0 公尺）
+#aggressive_reset:
+#    reset_distance: 3.0      # 激進清除範圍（半徑 1.0 公尺）
 
-clear_global_costmap:
-  reset_distance: 0.7
-  layer_names: ["obstacle_layer", "inflation_layer"]  # 可選，清哪些圖層
-  costmap: global_costmap  # 這是關鍵！指定清 global 而非 local
+#clear_global_costmap:
+#  reset_distance: 0.7
+#  layer_names: ["obstacle_layer", "inflation_layer"]  # 可選，清哪些圖層
+#  costmap: global_costmap  # 這是關鍵！指定清 global 而非 local

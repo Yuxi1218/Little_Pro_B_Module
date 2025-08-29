@@ -25,7 +25,7 @@ obstacle_layer:
 inflation_layer:
   enabled: true  # 啟用膨脹圖層（擴大障礙物邊界以保護機器人）
   cost_scaling_factor: 5  # 成本縮放係數，越大表示成本下降越快（靠近障礙物的懲罰更高）
-  inflation_radius: 0.3  # 膨脹半徑，距離障礙物多少公尺內會被視為高成本區
+  inflation_radius: 0.205  # 膨脹半徑，距離障礙物多少公尺內會被視為高成本區
   inflate_unknown: false  # 不對未知區域進行膨脹
   inflate_around_unknown: false  # 不在未知區域周圍膨脹
 

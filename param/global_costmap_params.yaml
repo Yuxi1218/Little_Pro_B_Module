@@ -11,7 +11,7 @@ global_costmap:
   resolution: 0.03  # costmap 的解析度（每格代表 0.03 公尺）
   origin_x: 0.0  # costmap 左下角的 X 座標（原點位置）
   origin_y: 0.0  # costmap 左下角的 Y 座標
-  track_unknown_space: false  # 不追蹤未知空間（未知空間不會顯示為障礙）
+  track_unknown_space: true  # 不追蹤未知空間（未知空間不會顯示為障礙）
 
   plugins:  # 啟用的 costmap 圖層（順序很重要）
      - {name: static_layer, type: "costmap_2d::StaticLayer"}  # 靜態圖層，來源是地圖伺服器

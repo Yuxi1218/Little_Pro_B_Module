@@ -14,7 +14,7 @@ local_costmap:
   height: 1                  # local costmap 高度（公尺）
   resolution: 0.03             # 圖格解析度（每格 0.03 公尺）
 
-  inflation_radius: 0.2        # 膨脹半徑（障礙物外圍的保護距離）
+  inflation_radius: 0.285        # 膨脹半徑（障礙物外圍的保護距離）
   cost_scaling_factor: 2.5     # 成本遞減的速度（越大越急遽）
 
   track_unknown_space: true   # 不追蹤未知區域（未知區域視為可通行）
