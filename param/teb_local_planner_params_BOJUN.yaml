@@ -1,0 +1,75 @@
+TebLocalPlannerROS:
+ odom_topic: odom
+
+ #策略相關
+ teb_autosize: True  # 是否允許改變軌跡的時域長度，也就是改變 dt_ref
+ dt_ref: 0.5         # 路徑上的兩個相鄰姿態的默認距離
+ dt_hysteresis: 0.1  # 允許改變的時域解析度的浮動範圍
+ global_plan_overwrite_orientation: True # 是否修正全局路徑中的臨時局部路徑點的朝向
+ max_global_plan_lookahead_dist: 2.0     # 最大向前看距離
+ feasibility_check_no_poses: 2           # 在判斷生成的軌跡是否衝突時使用，此時設置為2，即從軌跡起點開始逐個檢查軌跡上的2個點，若2個點均不發生碰撞，則認為本次軌跡有效。
+    
+ #運動相關     
+ max_vel_x: 0.26           # 最大速度
+ max_vel_x_backwards: 0.2 # 最大倒車速度，設置為0或者負數將導致錯誤。減少倒車應該修改倒車權重，不改這裡。
+ max_vel_theta: 1.0       # 最大轉向角速度，跟 min_turning_radius 相關 (r = v / omega)
+ acc_lim_x: 0.8           # 最大線加速度
+ acc_lim_theta: 1.0       # 最大角加速度
+
+ # ********************** 轉彎半徑相關 ********************
+ min_turning_radius: 0.0         # 小轉彎半徑。如果設為 0，表示可以原地轉彎。
+ wheelbase: 0.31                 # 只有在 cmd_angle_instead_rotvel為true時才有效
+ cmd_angle_instead_rotvel: False # 是否將收到的角速度消息轉換為操作上的角度變化。設置成 True 時，話題 vel_msg.angular.z 內的數據是轉軸角度。
+ # ********************************************************************
+
+#車體輪廓
+ footprint_model: # types可選項: "point", "circular", "two_circles", "line", "polygon"
+   type: "circular"
+   # 對 type "circular" 有效的參數：
+   radius: 0.17
+   # 對 type "line" 有效的參數：        
+   line_start: [0.0, 0.0] 
+   line_end: [0.35, 0.0]
+   # 對 type "two_circles" 有效的參數：
+   front_offset: 0.35
+   front_radius: 0.35
+   rear_offset: 0.35
+   rear_radius: 0.35
+   # 對 type "polygon" 有效的參數：
+   vertices: [[-0.205, -0.155], [-0.205, 0.155], [0.077, 0.155], [0.077, -0.155]]
+
+ #到達目標點的判斷容差   
+ xy_goal_tolerance: 0.02
+ yaw_goal_tolerance: 0.05
+    
+ #障礙物相關 
+ min_obstacle_dist: 0.1  # 與障礙物的最小間距
+ inflation_dist: 0.4     # 障礙物膨脹距離
+ include_costmap_obstacles: True          # 是否檢測動態障礙物
+ costmap_obstacles_behind_robot_dist: 1.0 # 身後多遠距離內障礙物加入檢測範圍
+ obstacle_poses_affected: 25              # 障礙物對附近多少個關鍵點產生影響
+ costmap_converter_plugin: ""             # costmap_converter 插件名稱，這裡不使用
+
+ #路徑優化相關
+ no_inner_iterations: 3     # 圖優化optimizer的迭代次數
+ no_outer_iterations: 3     # 外循環迭代次數
+ penalty_epsilon: 0.1       # 為所有的懲罰項增加一個小的安全餘量
+ weight_max_vel_x: 2        # 平移速度的優化權重
+ weight_max_vel_theta: 1    # 角速度的優化權重
+ weight_acc_lim_x: 1        # 平移加速度的優化權重
+ weight_acc_lim_theta: 1    # 角加速度的優化重量
+ weight_kinematics_nh: 1000 # 非完整運動學的優化權重
+ weight_kinematics_forward_drive: 1 # 往前移動的權重
+ weight_optimaltime: 1      # 耗時權重
+ weight_obstacle: 50        # 與障礙物保持距離的權重
+
+ #多線規劃
+ enable_homotopy_class_planning: True # 激活多線規劃
+ enable_multithreading: True          # 多線程計算
+ max_number_classes: 2                # 規劃的路徑線數上限
+ selection_cost_hysteresis: 1.0       # 路徑軌跡入選的評價上限
+ selection_obst_cost_scale: 1.0       # 障礙物評價在入選標準中的縮放倍率
+ selection_alternative_time_cost: False # 時間成本是否要進行平方計算
+ roadmap_graph_no_samples: 15         # 為創建 roadmap graph 而生成的樣本數
+ roadmap_graph_area_width: 5          # 關鍵點採樣的寬度，單位為米。
+

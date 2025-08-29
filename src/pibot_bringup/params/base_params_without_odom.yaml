@@ -1,9 +1,9 @@
-port: /dev/pibot
+port: /dev/ttyACM0
 baudrate: 921600
 
 base_frame: base_link
-odom_frame: odom
-odom_topic: odom
+odom_frame: void
+odom_topic: void
 
 publish_tf: false
 # topic
