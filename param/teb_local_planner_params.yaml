@@ -1,66 +1,66 @@
 TebLocalPlannerROS:
-  # 軌跡配置
-  teb_autosize: True
-  dt_ref: 0.4
-  dt_hysteresis: 0.1
-  global_plan_overwrite_orientation: True
-  max_global_plan_lookahead_dist: 3.0
-  feasibility_check_no_poses: 3
-  max_samples: 200
-  
-  # 機器人配置
-  max_vel_x: 0.3
-  max_vel_x_backwards: 0.2
-  max_vel_theta: 0.2
-  acc_lim_x: 0.5
-  acc_lim_theta: 0.5
-  min_turning_radius: 0.0  # 差分驅動設為0
-  
-  # 足跡模型
+  # 軌跡配置相關參數
+  teb_autosize: True              # 是否自動調整軌跡點數量
+  dt_ref: 0.4                     # 軌跡點之間的參考時間間隔
+  dt_hysteresis: 0.1              # 時間間隔的滯後調整範圍
+  global_plan_overwrite_orientation: True   # 是否覆寫全局路徑的方向
+  max_global_plan_lookahead_dist: 3.0      # 預覽全局路徑的最大距離
+  feasibility_check_no_poses: 3            # 可行性檢查的姿態數量
+  max_samples: 200                # 採樣的最大數量
+
+  # 機器人運動限制參數
+  max_vel_x: 0.3                 # 最大前進速度 (m/s)
+  max_vel_x_backwards: 0.2       # 最大後退速度 (m/s)
+  max_vel_theta: 0.2             # 最大旋轉速度 (rad/s)
+  acc_lim_x: 0.5                 # 線性加速度限制 (m/s^2)
+  acc_lim_theta: 0.5             # 角加速度限制 (rad/s^2)
+  min_turning_radius: 0.0        # 最小轉彎半徑，差分驅動設為0
+
+  # 機器人足跡模型設定
   footprint_model:
-    type: "point"  # 或 "circular", "polygon"
-  
-  # 目標容忍度  
-  xy_goal_tolerance: 0.3
-  yaw_goal_tolerance: 0.2
-  free_goal_vel: False
-  
-  # 障礙物 
-  inflation_dist: 0.03
-  min_obstacle_dist: 0.15
-  include_costmap_obstacles: True
-  costmap_obstacles_behind_robot_dist: 1.0
-  obstacle_poses_affected: 25
-  
-  # 優化
-  no_inner_iterations: 3
-  no_outer_iterations: 2
-  optimization_activate: True
-  optimization_verbose: False
-  penalty_epsilon: 0.1
-  weight_max_vel_x: 2
-  weight_max_vel_theta: 1
-  weight_acc_lim_x: 1
-  weight_acc_lim_theta: 1
-  weight_kinematics_nh: 1000
-  weight_kinematics_forward_drive: 1
-  weight_shortest_path: 1
-  weight_optimaltime: 2
-  weight_obstacle: 30
-  
-  # 平行軌跡規劃
-  enable_homotopy_class_planning: False
-  enable_multithreading: True
-  max_number_classes: 4
-  roadmap_graph_no_samples: 15
-  roadmap_graph_area_width: 5
-  h_signature_prescaler: 0.5
-  h_signature_threshold: 0.1
-  obstacle_heading_threshold: 0.45
-  visualize_hc_graph: False
- 
-  # Recovery
-  shrink_horizon_backup: True
-  oscillation_recovery: True
-  oscillation_v_eps: 0.2
-  oscillation_omega_eps: 0.2
+    type: "point"                # 機器人形狀模型類型：點/圓形/多邊形
+
+  # 目標達成容忍度設定  
+  xy_goal_tolerance: 0.3         # 位置目標達成容忍度 (m)
+  yaw_goal_tolerance: 0.2        # 方向目標達成容忍度 (rad)
+  free_goal_vel: False          # 到達終點時是否允許非零速度
+
+  # 障礙物處理參數
+  inflation_dist: 0.03           # 障礙物膨脹距離 (m)
+  min_obstacle_dist: 0.15        # 與障礙物最小距離 (m)
+  include_costmap_obstacles: True # 是否包含代價地圖中的障礙物
+  costmap_obstacles_behind_robot_dist: 1.0  # 考慮機器人後方障礙物的距離
+  obstacle_poses_affected: 25     # 受障礙物影響的路徑點數量
+
+  # 優化器參數設定
+  no_inner_iterations: 3         # 內部迭代次數
+  no_outer_iterations: 2         # 外部迭代次數
+  optimization_activate: True    # 是否啟用優化
+  optimization_verbose: False    # 是否輸出詳細優化信息
+  penalty_epsilon: 0.1          # 軟約束懲罰因子
+  weight_max_vel_x: 2           # 最大速度約束權重
+  weight_max_vel_theta: 1       # 最大角速度約束權重
+  weight_acc_lim_x: 1           # 加速度限制權重
+  weight_acc_lim_theta: 1       # 角加速度限制權重
+  weight_kinematics_nh: 1000    # 非完整運動學約束權重
+  weight_kinematics_forward_drive: 1  # 前向驅動約束權重
+  weight_shortest_path: 1       # 最短路徑權重
+  weight_optimaltime: 2         # 最優時間權重
+  weight_obstacle: 30           # 障礙物避開權重
+
+  # 同倫類路徑規劃參數
+  enable_homotopy_class_planning: False  # 是否啟用同倫類規劃
+  enable_multithreading: True   # 是否啟用多線程
+  max_number_classes: 4         # 最大同倫類數量
+  roadmap_graph_no_samples: 15  # 路徑圖採樣點數
+  roadmap_graph_area_width: 5   # 路徑圖區域寬度
+  h_signature_prescaler: 0.5    # H-signature預縮放因子
+  h_signature_threshold: 0.1    # H-signature閾值
+  obstacle_heading_threshold: 0.45  # 障礙物航向閾值
+  visualize_hc_graph: False     # 是否視覺化同倫類圖
+
+  # 恢復行為參數
+  shrink_horizon_backup: True    # 是否在規劃失敗時縮小規劃範圍
+  oscillation_recovery: True     # 是否啟用擺盪恢復
+  oscillation_v_eps: 0.2        # 速度擺盪閾值
+  oscillation_omega_eps: 0.2    # 角速度擺盪閾值

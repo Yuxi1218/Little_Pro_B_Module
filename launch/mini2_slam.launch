@@ -1,24 +1,30 @@
 <launch>
-  <!-- 啟動 Lidar -->
+  <!-- 啟動 Lidar，包含雷射掃描儀的驅動程式和相關設定 -->
   <include file="$(find ydlidar)/launch/X4_lidar.launch" />    
+  <!-- 啟動 pibot 機器人，包含底盤、馬達和感測器的啟動 -->
   <include file="$(find pibot_bringup)/launch/bringup.launch" />   
 
-  <!-- 啟動 SLAM -->
+  <!-- 啟動 SLAM (Simultaneous Localization and Mapping) -->
   <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <!-- 設定 base_frame，機器人的基座座標系 -->
     <param name="base_frame" value="base_link"/>
+    <!-- 設定 odom_frame，里程計座標系 -->
     <param name="odom_frame" value="odom"/>
+    <!-- 設定地圖更新的頻率，單位為秒 -->
     <param name="map_update_interval" value="2.0"/>
-    <!-- 讀取 gmapping_params.yaml -->
+    <!-- 從 YAML 檔案讀取 gmapping 的參數設定 -->
     <rosparam command="load" file="/home/mini2/catkin_ws/param/gmapping_params.yaml"/>
   </node>
 
-  <!-- 啟動 move_base -->
+  <!-- 啟動 move_base，負責路徑規劃和運動控制 -->
   <arg name="move_forward_only" default="false"/>
-  <!-- move_base -->
+  <!-- move_base 的啟動檔案 -->
   <include file="/home/mini2/catkin_ws/launch/move_base.launch">   
+    <!-- 設定是否只允許機器人向前移動 -->
     <arg name="move_forward_only" value="$(arg move_forward_only)"/>
   </include>
 
+  <!-- 啟動名為 MyGo 的節點，使用 tomorin 套件中的 MyGO.py 程式 -->
   <node name="MyGo" pkg="tomorin" type="MyGO.py" output="screen"/>
 
 </launch>

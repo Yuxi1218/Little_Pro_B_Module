@@ -1,8 +1,9 @@
 <launch>
-
+  <!-- 啟動ydlidar X4雷達 -->
  <include file="$(find ydlidar)/launch/X4_lidar.launch" />    
+  <!-- 啟動pibot機器人的bringup，包含IMU -->
  <include file="$(find pibot_bringup)/launch/bringup_with_imu.launch" /> 
+  <!-- 啟動Gmapping SLAM演算法 -->
  <include file="/home/mini2/catkin_ws/launch/gmapping.launch" />   
   
  </launch>
-    

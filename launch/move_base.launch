@@ -1,24 +1,24 @@
 <launch>
-  <!-- Arguments -->  
-  <arg name="cmd_vel_topic" default="/cmd_vel" />
-  <arg name="odom_topic" default="odom" />
-  <arg name="move_forward_only" default="false"/> 
+  <!-- Arguments，參數 -->
+  <arg name="cmd_vel_topic" default="/cmd_vel" /> <!-- cmd_vel_topic 參數，預設值為 /cmd_vel -->
+  <arg name="odom_topic" default="odom" /> <!-- odom_topic 參數，預設值為 odom -->
+  <arg name="move_forward_only" default="false"/> <!-- move_forward_only 參數，預設值為 false -->
   
 
   <!-- move_base -->
-  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen"> 
-    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
-    <rosparam file="/home/mini2/catkin_ws/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="/home/mini2/catkin_ws/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
-    <rosparam file="/home/mini2/catkin_ws/param/local_costmap_params.yaml" command="load" />
-    <rosparam file="/home/mini2/catkin_ws/param/global_costmap_params.yaml" command="load" />
-    <rosparam file="/home/mini2/catkin_ws/param/move_base_params.yaml" command="load" />
-    <rosparam file="/home/mini2/catkin_ws/param/dwa_local_planner_params.yaml" command="load" />
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen"> <!-- 啟動 move_base 節點 -->
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" /> <!-- 設定 base_local_planner 為 DWA -->
+    <rosparam file="/home/mini2/catkin_ws/param/costmap_common_params.yaml" command="load" ns="global_costmap" /> <!-- 載入 global_costmap 的通用參數 -->
+    <rosparam file="/home/mini2/catkin_ws/param/costmap_common_params.yaml" command="load" ns="local_costmap" /> <!-- 載入 local_costmap 的通用參數 -->
+    <rosparam file="/home/mini2/catkin_ws/param/local_costmap_params.yaml" command="load" /> <!-- 載入 local_costmap 的參數 -->
+    <rosparam file="/home/mini2/catkin_ws/param/global_costmap_params.yaml" command="load" /> <!-- 載入 global_costmap 的參數 -->
+    <rosparam file="/home/mini2/catkin_ws/param/move_base_params.yaml" command="load" /> <!-- 載入 move_base 的參數 -->
+    <rosparam file="/home/mini2/catkin_ws/param/dwa_local_planner_params.yaml" command="load" /> <!-- 載入 DWA local planner 的參數 -->
     
 
     
-    <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
-    <remap from="odom" to="$(arg odom_topic)"/>
-    <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
+    <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/> <!-- 將 cmd_vel topic 重新映射到參數指定的值 -->
+    <remap from="odom" to="$(arg odom_topic)"/> <!-- 將 odom topic 重新映射到參數指定的值 -->
+    <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" /> <!-- 如果 move_forward_only 為 true，則設定 DWA planner 的最小 x 速度為 0 -->
   </node>
 </launch>
