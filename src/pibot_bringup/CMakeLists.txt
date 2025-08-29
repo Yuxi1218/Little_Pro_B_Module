@@ -198,16 +198,15 @@ include_directories(
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
 
-# add_definitions(-DUSE_BOOST_SERIAL_TRANSPORT)
-
 add_executable(pibot_driver
   src/main.cpp
   src/base_driver_config.cpp
   src/base_driver.cpp
   src/data_holder.cpp
-  src/simple_dataframe_master.cpp  
-  src/serial_transport2.cpp
+  src/simple_dataframe_master.cpp
+  src/serial_transport.cpp
 )
+
 add_dependencies(pibot_driver ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(pibot_driver
   ${catkin_LIBRARIES}
