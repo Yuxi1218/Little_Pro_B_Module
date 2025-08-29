@@ -1,0 +1,41 @@
+shutdown_costmaps: false              # 是否在非使用時關閉 costmap（false = 常開，提高反應速度）
+controller_frequency: 10.0           # 控制器更新頻率（Hz）
+planner_frequency: 5.0               # 全域路徑規劃器更新頻率（Hz）
+
+planner_patience: 5.0                # 等待 planner 成功規劃的最大秒數（超過則執行 recovery）
+controller_patience: 15.0           # 等待 controller 控制成功的最大秒數（否則執行 recovery）
+
+conservative_reset_dist: 3.0         # 當無法規劃時，進行 costmap 清除的範圍（保守清除半徑）
+
+oscillation_timeout: 5.0            # 若持續振盪超過此秒數則進行復原行為
+oscillation_distance: 0.15           # 判斷振盪的移動距離（若移動不到此值視為卡住）
+
+recovery_behavior_enabled: true      # 啟用自動復原機制（如原地旋轉或 costmap 清除）
+clearing_rotation_allowed: true      # 允許原地旋轉來嘗試脫困
+
+NavfnROS:
+  allow_unknown: true
+
+# === 自訂復原行為順序 ===
+recovery_behaviors:
+    - name: 'clear_global_costmap'
+      type: 'clear_costmap_recovery/ClearCostmapRecovery'
+    - name: 'conservative_reset'
+      type: 'clear_costmap_recovery/ClearCostmapRecovery'
+    - name: 'aggressive_reset'
+      type: 'clear_costmap_recovery/ClearCostmapRecovery'
+    
+    # - name: 'rotate_recovery'
+    #   type: 'rotate_recovery/RotateRecovery'
+    
+
+# === 清除範圍設定 ===
+#conservative_reset:
+#    reset_distance: 1.0      # 保守清除範圍（半徑 3.0 公尺）
+#aggressive_reset:
+#    reset_distance: 3.0      # 激進清除範圍（半徑 1.0 公尺）
+
+#clear_global_costmap:
+#  reset_distance: 0.7
+#  layer_names: ["obstacle_layer", "inflation_layer"]  # 可選，清哪些圖層
+#  costmap: global_costmap  # 這是關鍵！指定清 global 而非 local

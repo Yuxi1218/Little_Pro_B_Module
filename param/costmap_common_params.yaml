@@ -1,0 +1,34 @@
+# footprint 設定機器人底部外型為一個 28cm x 28cm 的正方形（單位：公尺）
+footprint: [[-0.16, -0.16], [-0.16, 0.16], [0.16, 0.16], [0.16,-0.16]]
+
+# ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ obstacle_layer（障礙物圖層）設定 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+obstacle_layer:
+  enabled: true  # 啟用障礙物圖層
+  max_obstacle_height: 1.0  # 感知障礙物的最大高度（單位：公尺），超過視為無效
+  combination_method: 1  # 障礙物層與其他層的合併方式（1 = 最大值）
+  track_unknown_space: true  # 是否追蹤未知空間（即地圖上無資料處）
+
+  obstacle_range: 3.5  # 機器人可感知障礙物的最遠距離（雷射射到障礙物才算）
+  raytrace_range: 0.5  # 雷射可以清除障礙物的最大距離（raytrace清除障礙物用）
+
+  observation_sources: scan  # 感測器來源清單
+  scan: 
+    sensor_fram: base_scan  # 感測器座標框架（注意：應為 sensor_frame，有拼字錯誤）
+    data_type: LaserScan  # 感測資料格式
+    topic: scan  # 訂閱的 topic 名稱
+    marking: true  # 是否用來標記障礙物
+    clearing: true  # 是否用來清除障礙物
+    min_obstacle_height: 0.0  # 可偵測的最小障礙物高度
+    max_obstacle_height: 0.5  # 可偵測的最大障礙物高度
+
+# ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ inflation_layer（膨脹圖層）設定 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+inflation_layer:
+  enabled: true  # 啟用膨脹圖層（擴大障礙物邊界以保護機器人）
+  cost_scaling_factor: 5  # 成本縮放係數，越大表示成本下降越快（靠近障礙物的懲罰更高）
+  inflation_radius: 0.3  # 膨脹半徑，距離障礙物多少公尺內會被視為高成本區
+  inflate_unknown: false  # 不對未知區域進行膨脹
+  inflate_around_unknown: false  # 不在未知區域周圍膨脹
+
+# ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ static_layer（靜態圖層）設定 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+static_layer:
+  enabled: false  # 啟用靜態圖層（來自地圖伺服器的靜態地圖）

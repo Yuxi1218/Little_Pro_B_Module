@@ -1,0 +1,19 @@
+global_costmap:
+  global_frame: map  # 全域座標系統的框架（通常為地圖）
+  robot_base_frame: base_link  # 機器人的座標框架（base_link 表示機身中心）
+
+  update_frequency: 5.0  # 每秒更新 costmap 次數（Hz）
+  publish_frequency: 3.0  # 每秒發佈 costmap 次數（Hz）
+  always_send_full_costmap: true  # 每次都發送完整 costmap，而非只發送差異區域
+  transform_tolerance: 1.0  # TF 座標容忍延遲秒數
+
+  static_map: false  # 不使用地圖伺服器的地圖（若為 true 則會載入 static_map topic）
+  resolution: 0.03  # costmap 的解析度（每格代表 0.03 公尺）
+  origin_x: 0.0  # costmap 左下角的 X 座標（原點位置）
+  origin_y: 0.0  # costmap 左下角的 Y 座標
+  track_unknown_space: false  # 不追蹤未知空間（未知空間不會顯示為障礙）
+
+  plugins:  # 啟用的 costmap 圖層（順序很重要）
+     - {name: static_layer, type: "costmap_2d::StaticLayer"}  # 靜態圖層，來源是地圖伺服器
+     - {name: obstacle_layer, type: "costmap_2d::VoxelLayer"}  # 障礙物圖層，處理雷射點雲
+     - {name: inflation_layer, type: "costmap_2d::InflationLayer"}  # 膨脹圖層，用來擴張障礙物邊界

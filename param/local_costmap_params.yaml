@@ -1,0 +1,27 @@
+local_costmap:
+  global_frame: odom           # 使用 odom 座標框架（提供相對定位資訊）
+  robot_base_frame: base_link  # 機器人本體的座標框架
+
+  update_frequency: 5.0        # costmap 更新頻率（Hz）
+  publish_frequency: 3.0       # costmap 發佈頻率（Hz）
+  always_send_full_costmap: true  # 是否每次都發送完整 costmap（true：發送整張）
+
+  transform_tolerance: 1.0     # TF 容忍時間（秒）
+
+  static_map: false           # 關閉靜態地圖（通常 local_costmap 不使用靜態地圖）
+  rolling_window: true         # 啟用隨機器人移動的滾動式地圖
+  width: 1                   # local costmap 寬度（公尺）
+  height: 1                  # local costmap 高度（公尺）
+  resolution: 0.03             # 圖格解析度（每格 0.03 公尺）
+
+  inflation_radius: 0.2        # 膨脹半徑（障礙物外圍的保護距離）
+  cost_scaling_factor: 2.5     # 成本遞減的速度（越大越急遽）
+
+  track_unknown_space: true   # 不追蹤未知區域（未知區域視為可通行）
+  #origin_x: 0.0               # 可省略（由 rolling_window 自動管理）
+  #origin_y: 0.0
+
+  # 啟用的圖層插件（順序影響 costmap 結果）
+  plugins:
+    - {name: obstacle_layer, type: "costmap_2d::VoxelLayer"}     # 處理障礙物資料的層（支援雷射/點雲）
+    - {name: inflation_layer, type: "costmap_2d::InflationLayer"} # 負責擴大障礙物邊界的圖層

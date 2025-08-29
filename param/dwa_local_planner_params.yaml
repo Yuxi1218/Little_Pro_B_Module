@@ -1,0 +1,47 @@
+DWAPlannerROS:
+
+  # === 機器人移動速度限制設定 ===
+  max_vel_x: 1.5        # 最大 X 軸速度（前進）
+  min_vel_x: -0.15       # 最小 X 軸速度（後退）
+
+  max_vel_y: 0.0         # Y 軸最大速度（設為 0，因為差速驅動無法側移）
+  min_vel_y: 0.0         # Y 軸最小速度
+
+  max_vel_trans: 1.5     # 最大平移速度（綜合速度限制，通常與 max_vel_x 相同）
+  min_vel_trans: -0.1    # 最小平移速度（負值表示允許後退）
+
+  max_vel_theta: 1.0     # 最大旋轉速度（rad/s）
+  min_vel_theta: -0.3    # 最小旋轉速度（可為負，表示允許反轉）
+
+  acc_lim_x: 2.0         # X 軸加速度限制（m/s²）
+  acc_lim_y: 0.0         # Y 軸加速度限制（0，因為差速無法側移）
+  acc_lim_theta: 1.5     # 角加速度限制（rad/s²）
+
+  # === 目標允許誤差範圍 ===
+  xy_goal_tolerance: 0.1           # XY 位置允許誤差（公尺）
+  yaw_goal_tolerance: 0.1          # 朝向允許誤差（rad）
+  latch_xy_goal_tolerance: false   # 是否一旦達到 XY 目標就鎖定不再檢查（false 為每次都檢查）
+
+  # === 預測模擬設定 ===
+  sim_time: 1.5            # 模擬多久時間（秒）作為路徑評估依據
+  sim_granularity: 0.015   # 每個模擬步長（越小越精細，但越慢）
+  vx_samples: 20           # 平移速度取樣點數
+  vy_samples: 0            # 側移速度取樣點數（0 表示不考慮）
+  vth_samples: 40          # 旋轉速度取樣點數
+  controller_frequency: 10.0  # 控制頻率（Hz）
+
+  # === 路徑評分參數（權重）===
+  path_distance_bias: 20.0       # 越高越偏好靠近全局路徑（建議大於 goal_distance_bias）
+  goal_distance_bias: 40.0       # 越高越偏好接近目標
+  occdist_scale: 0.05            # 障礙物成本比重（越高越怕碰撞）
+  forward_point_distance: 0.325  # 計算成本時會額外加一個前向參考點距離
+  stop_time_buffer: 0.2          # 預留時間避免碰撞（越高越保守）
+  scaling_speed: 0.25            # 超過該速度後才開始縮放 footprint
+  max_scaling_factor: 0.2        # 最大縮放比例（避免過小）
+
+  # === 防止振盪設定 ===
+  oscillation_reset_dist: 0.05   # 移動多少距離後重置振盪偵測（公尺）
+
+  # === 除錯輸出（RViz 可視化）===
+  publish_traj_pc : true         # 發佈模擬軌跡為 point cloud
+  publish_cost_grid_pc: true     # 發佈成本格子圖為 point cloud
