@@ -45,8 +45,4 @@
     <!-- 設定是否只允許機器人向前移動 -->
     <arg name="move_forward_only" value="$(arg move_forward_only)"/>
   </include>
-
-  <!-- 啟動名為 MyGo 的節點，使用 tomorin 套件中的 MyGO.py 程式 -->
-  <node name="MyGo" pkg="tomorin" type="MyGO.py" output="screen"/>
-
 </launch>

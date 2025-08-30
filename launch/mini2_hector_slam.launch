@@ -1,7 +1,7 @@
 <launch>
   <!-- 定義一個參數 'use_rviz'，預設值為 'true' -->
   <arg name="use_rviz" default="true" />
-
+  <include file="$(find ydlidar)/launch/X4_lidar.launch" />    
   <!-- Hector SLAM 節點 -->
   <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" output="screen">
     
