@@ -3,7 +3,8 @@
   <arg name="cmd_vel_topic" default="/cmd_vel"/>
   <arg name="odom_topic" default="odom"/>
   <arg name="scan_topic" default="scan"/>
-
+  <arg name="move_forward_only" default="false"/>
+  
   <!-- 啟動 Lidar，包含雷射掃描儀的驅動程式和相關設定 -->
   <include file="$(find ydlidar)/launch/X4_lidar.launch" />    
   <!-- 啟動 pibot 機器人，包含底盤、馬達和感測器的啟動 -->
