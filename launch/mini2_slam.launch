@@ -2,7 +2,7 @@
   <!-- 添加必要的參數宣告 -->
   <arg name="cmd_vel_topic" default="/cmd_vel"/>
   <arg name="odom_topic" default="odom"/>
-  <arg name="move_forward_only" default="false"/>
+  <arg name="scan_topic" default="scan"/>
 
   <!-- 啟動 Lidar，包含雷射掃描儀的驅動程式和相關設定 -->
   <include file="$(find ydlidar)/launch/X4_lidar.launch" />    
@@ -40,9 +40,10 @@
     <param name="advertise_map_service" value="true"/>
     
     <!-- Scan topic -->
-    <param name="scan_topic" value="scan"/>
+    <param name="scan_topic" value="$(arg scan_topic)"/>
   </node>
 
+  <!-- 啟動 move_base，負責路徑規劃和運動控制 -->
   <!-- 啟動 move_base，負責路徑規劃和運動控制 -->
   <!-- move_base 的啟動檔案 -->
   <include file="/home/saki/catkin_ws/launch/move_base.launch">   
@@ -50,11 +51,3 @@
     <arg name="odom_topic" value="$(arg odom_topic)"/>
     <arg name="move_forward_only" value="$(arg move_forward_only)"/>
   </include>
-  <!-- 啟動 move_base，負責路徑規劃和運動控制 -->
-  <arg name="move_forward_only" default="false"/>
-  <!-- move_base 的啟動檔案 -->
-  <include file="/home/saki/catkin_ws/launch/move_base.launch">   
-    <!-- 設定是否只允許機器人向前移動 -->
-    <arg name="move_forward_only" value="$(arg move_forward_only)"/>
-  </include>
-</launch>
