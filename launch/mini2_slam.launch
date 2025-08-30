@@ -6,7 +6,6 @@
 
   <node pkg="move_base" type="move_base" name="move_base" output="screen">
     <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
-    <param name="move_forward_only" value="$(arg move_forward_only)" /> <!-- move_forward_only 參數，預設值為 false -->
     <rosparam file="/home/saki/catkin_ws/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
     <rosparam file="/home/saki/catkin_ws/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
     <rosparam file="/home/saki/catkin_ws/param/local_costmap_params.yaml" command="load" />
