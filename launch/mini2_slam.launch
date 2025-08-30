@@ -44,10 +44,10 @@
   </node>
 
   <!-- 啟動 move_base，負責路徑規劃和運動控制 -->
-  <!-- 啟動 move_base，負責路徑規劃和運動控制 -->
   <!-- move_base 的啟動檔案 -->
   <include file="/home/saki/catkin_ws/launch/move_base.launch">   
     <arg name="cmd_vel_topic" value="$(arg cmd_vel_topic)"/>
     <arg name="odom_topic" value="$(arg odom_topic)"/>
     <arg name="move_forward_only" value="$(arg move_forward_only)"/>
   </include>
+</launch>
