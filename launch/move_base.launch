@@ -7,18 +7,18 @@
 
   <!-- move_base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen"> <!-- 啟動 move_base 節點 -->
-    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" /> <!-- 設定 base_local_planner 為 DWA -->
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" /> <!-- 設定 base_local_planner 為 TEB -->
     <rosparam file="/home/saki/catkin_ws/param/costmap_common_params.yaml" command="load" ns="global_costmap" /> <!-- 載入 global_costmap 的通用參數 -->
     <rosparam file="/home/saki/catkin_ws/param/costmap_common_params.yaml" command="load" ns="local_costmap" /> <!-- 載入 local_costmap 的通用參數 -->
-    <rosparam file="/home/saki/catkin_ws/param/local_costmap_params.yaml" command="load" /> <!-- 載入 local_costmap 的參數 -->
+    <rosparam file="/home/saki/catkin_wsparam/local_costmap_params.yaml" command="load" /> <!-- 載入 local_costmap 的參數 -->
     <rosparam file="/home/saki/catkin_ws/param/global_costmap_params.yaml" command="load" /> <!-- 載入 global_costmap 的參數 -->
     <rosparam file="/home/saki/catkin_ws/param/move_base_params.yaml" command="load" /> <!-- 載入 move_base 的參數 -->
-    <rosparam file="/home/saki/catkin_ws/param/dwa_local_planner_params.yaml" command="load" /> <!-- 載入 DWA local planner 的參數 -->
+    <rosparam file="/home/saki/catkin_ws/param/teb_local_planner_params.yaml" command="load" /> <!-- 載入 TEB local planner 的參數 -->
     
 
     
     <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/> <!-- 將 cmd_vel topic 重新映射到參數指定的值 -->
     <remap from="odom" to="$(arg odom_topic)"/> <!-- 將 odom topic 重新映射到參數指定的值 -->
-    <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" /> <!-- 如果 move_forward_only 為 true，則設定 DWA planner 的最小 x 速度為 0 -->
+    <!-- <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" /> --> <!-- 如果 move_forward_only 為 true，則設定 DWA planner 的最小 x 速度為 0 -->
   </node>
 </launch>

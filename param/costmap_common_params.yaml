@@ -13,7 +13,7 @@ obstacle_layer:
 
   observation_sources: scan  # 感測器來源清單
   scan: 
-    sensor_fram: base_scan  # 感測器座標框架（注意：應為 sensor_frame，有拼字錯誤）
+    sensor_frame: base_scan  # 感測器座標框架（注意：應為 sensor_frame，有拼字錯誤）
     data_type: LaserScan  # 感測資料格式
     topic: scan  # 訂閱的 topic 名稱
     marking: true  # 是否用來標記障礙物

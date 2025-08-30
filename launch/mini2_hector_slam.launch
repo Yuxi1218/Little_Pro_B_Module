@@ -59,6 +59,6 @@
   
   <!-- RViz -->
   <!-- 使用特定的配置文件啟動 RViz，取決於 'use_rviz' 參數 -->
-  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find pibot_bringup)/rviz/gmapping.rviz" if="$(arg use_rviz)"/>
+  <node pkg="rviz" type="rviz" name="rviz" args="-d /home/saki/catkin_ws/gmapping.rviz" if="$(arg use_rviz)"/>
 
 </launch>
