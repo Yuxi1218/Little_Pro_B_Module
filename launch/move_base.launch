@@ -8,12 +8,12 @@
   <!-- move_base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen"> <!-- 啟動 move_base 節點 -->
     <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" /> <!-- 設定 base_local_planner 為 DWA -->
-    <rosparam file="/home/mini2/catkin_ws/param/costmap_common_params.yaml" command="load" ns="global_costmap" /> <!-- 載入 global_costmap 的通用參數 -->
-    <rosparam file="/home/mini2/catkin_ws/param/costmap_common_params.yaml" command="load" ns="local_costmap" /> <!-- 載入 local_costmap 的通用參數 -->
-    <rosparam file="/home/mini2/catkin_ws/param/local_costmap_params.yaml" command="load" /> <!-- 載入 local_costmap 的參數 -->
-    <rosparam file="/home/mini2/catkin_ws/param/global_costmap_params.yaml" command="load" /> <!-- 載入 global_costmap 的參數 -->
-    <rosparam file="/home/mini2/catkin_ws/param/move_base_params.yaml" command="load" /> <!-- 載入 move_base 的參數 -->
-    <rosparam file="/home/mini2/catkin_ws/param/dwa_local_planner_params.yaml" command="load" /> <!-- 載入 DWA local planner 的參數 -->
+    <rosparam file="/home/saki/catkin_ws/param/costmap_common_params.yaml" command="load" ns="global_costmap" /> <!-- 載入 global_costmap 的通用參數 -->
+    <rosparam file="/home/saki/catkin_ws/param/costmap_common_params.yaml" command="load" ns="local_costmap" /> <!-- 載入 local_costmap 的通用參數 -->
+    <rosparam file="/home/saki/catkin_ws/param/local_costmap_params.yaml" command="load" /> <!-- 載入 local_costmap 的參數 -->
+    <rosparam file="/home/saki/catkin_ws/param/global_costmap_params.yaml" command="load" /> <!-- 載入 global_costmap 的參數 -->
+    <rosparam file="/home/saki/catkin_ws/param/move_base_params.yaml" command="load" /> <!-- 載入 move_base 的參數 -->
+    <rosparam file="/home/saki/catkin_ws/param/dwa_local_planner_params.yaml" command="load" /> <!-- 載入 DWA local planner 的參數 -->
     
 
     

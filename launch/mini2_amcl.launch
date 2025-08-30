@@ -7,7 +7,7 @@
   <node pkg="map_server" name="map_server" type="map_server" args="/home/mini2/catkin_ws/maps/ai007.yaml"/> <!-- 啟動地圖伺服器節點 -->
 
   <!-- AMCL --> <!-- AMCL 定位 (已註解) -->
-  <include file="/home/mini2/catkin_ws/launch/amcl.launch"/> <!-- 啟動 AMCL 定位 -->
+  <include file="/home/saki/catkin_ws/launch/amcl.launch"/> <!-- 啟動 AMCL 定位 -->
   
   <!-- node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop" output="screen"/ --> <!-- 啟動鍵盤遙控節點 (已註解) -->
  

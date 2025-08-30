@@ -99,6 +99,12 @@ sudo apt-get install ros-noetic-rqt-* -y
 sudo apt-get install ros-noetic-plotjuggler-ros -y
 ```
 
+### teleop-twist-keyboard
+
+```terminal
+sudo apt-get isntall ros-noetic-teleop-twist-keyboard -y
+```
+
 ## rosdep and workspace
 
 ```terminal
