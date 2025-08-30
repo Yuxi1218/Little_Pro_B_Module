@@ -4,6 +4,20 @@
   <!-- 啟動 pibot 機器人，包含底盤、馬達和感測器的啟動 -->
   <include file="$(find pibot_bringup)/launch/bringup.launch" />   
 
+  <node pkg="move_base" type="move_base" name="move_base" output="screen">
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+    <param name="move_forward_only" value="$(arg move_forward_only)" /> <!-- move_forward_only 參數，預設值為 false -->
+    <rosparam file="/home/saki/catkin_ws/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="/home/saki/catkin_ws/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="/home/saki/catkin_ws/param/local_costmap_params.yaml" command="load" />
+    <rosparam file="/home/saki/catkin_ws/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="/home/saki/catkin_ws/param/move_base_params.yaml" command="load" />
+    <rosparam file="/home/saki/catkin_ws/param/teb_local_planner_params.yaml" command="load" />
+
+    <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+    <remap from="odom" to="$(arg odom_topic)"/>
+  </node>
+
   <!-- Use Hector SLAM instead of GMapping -->
   <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" output="screen">
     <!-- Frame names -->

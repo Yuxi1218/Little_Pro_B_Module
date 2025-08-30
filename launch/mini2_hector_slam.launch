@@ -9,7 +9,7 @@
     <!-- 地圖幀 -->
     <param name="map_frame" value="map" />
     <!-- 機器人的基底幀 -->
-    <param name="base_frame" value="base_footprint" />
+    <param name="base_frame" value="base_link" />
     <!-- 里程計幀 -->
     <param name="odom_frame" value="odom" />
     
