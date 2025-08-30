@@ -8,14 +8,14 @@
   <!-- move_base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen"> 
     <!-- Load common parameters -->
-    <rosparam file="$(find Little_Pro_B_Module)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="$(find Little_Pro_B_Module)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="/home/saki/catkin_ws/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="/home/saki/catkin_ws/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
     
     <!-- Load specific parameters -->
-    <rosparam file="$(find Little_Pro_B_Module)/param/local_costmap_params.yaml" command="load" />
-    <rosparam file="$(find Little_Pro_B_Module)/param/global_costmap_params.yaml" command="load" />
-    <rosparam file="$(find Little_Pro_B_Module)/param/teb_local_planner_params.yaml" command="load" />
-    
+    <rosparam file="/home/saki/catkin_ws/param/local_costmap_params.yaml" command="load" />
+    <rosparam file="/home/saki/catkin_ws/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="/home/saki/catkin_ws/param/teb_local_planner_params.yaml" command="load" />
+
     <!-- Set planner configs -->
     <param name="base_global_planner" value="global_planner/GlobalPlanner" />
     <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
