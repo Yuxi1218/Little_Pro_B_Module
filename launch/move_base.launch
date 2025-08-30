@@ -10,7 +10,7 @@
     <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" /> <!-- 設定 base_local_planner 為 TEB -->
     <rosparam file="/home/saki/catkin_ws/param/costmap_common_params.yaml" command="load" ns="global_costmap" /> <!-- 載入 global_costmap 的通用參數 -->
     <rosparam file="/home/saki/catkin_ws/param/costmap_common_params.yaml" command="load" ns="local_costmap" /> <!-- 載入 local_costmap 的通用參數 -->
-    <rosparam file="/home/saki/catkin_wsparam/local_costmap_params.yaml" command="load" /> <!-- 載入 local_costmap 的參數 -->
+    <rosparam file="/home/saki/catkin_ws/param/local_costmap_params.yaml" command="load" /> <!-- 載入 local_costmap 的參數 -->
     <rosparam file="/home/saki/catkin_ws/param/global_costmap_params.yaml" command="load" /> <!-- 載入 global_costmap 的參數 -->
     <rosparam file="/home/saki/catkin_ws/param/move_base_params.yaml" command="load" /> <!-- 載入 move_base 的參數 -->
     <rosparam file="/home/saki/catkin_ws/param/teb_local_planner_params.yaml" command="load" /> <!-- 載入 TEB local planner 的參數 -->
