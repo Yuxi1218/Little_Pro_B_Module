@@ -137,3 +137,14 @@ echo "source ~/catkin_ws/devel/setup.zsh" >> ~/.zshrc
 ```terminal
 rosdep install --from-paths src --ignore-src -r -y
 ```
+
+## ydlidar固定
+
+```terminal
+# 設定USB裝置別名
+sudo chmod 777 /dev/ttyUSB0
+# 或建立udev規則讓裝置固定為 /dev/ydlidar
+echo 'KERNEL=="ttyUSB*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE:="0666", GROUP:="dialout", SYMLINK+="ydlidar"' | sudo tee /etc/udev/rules.d/ydlidar.rules
+
+sudo udevadm control --reload-rules && sudo udevadm trigger
+```
