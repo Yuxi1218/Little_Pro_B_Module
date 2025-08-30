@@ -6,7 +6,10 @@
   <arg name="move_forward_only" default="false"/>
   
   <!-- 啟動 Lidar，包含雷射掃描儀的驅動程式和相關設定 -->
-  <include file="$(find ydlidar)/launch/X4_lidar.launch" />    
+  <include file="$(find ydlidar)/launch/X4_lidar.launch">
+    <!-- 添加命名空間以避免節點名稱衝突 -->
+    <arg name="node_name" value="ydlidar_node_slam"/>
+  </include>    
   <!-- 啟動 pibot 機器人，包含底盤、馬達和感測器的啟動 -->
   <include file="$(find pibot_bringup)/launch/bringup.launch" />   
 
