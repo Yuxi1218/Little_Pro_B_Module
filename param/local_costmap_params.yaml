@@ -8,7 +8,6 @@ local_costmap:
 
   transform_tolerance: 1.0     # TF 容忍時間（秒）
 
-  static_map: false           # 關閉靜態地圖（通常 local_costmap 不使用靜態地圖）
   rolling_window: true         # 啟用隨機器人移動的滾動式地圖
   width: 1                   # local costmap 寬度（公尺）
   height: 1                  # local costmap 高度（公尺）

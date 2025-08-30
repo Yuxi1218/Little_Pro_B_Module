@@ -6,8 +6,6 @@ global_costmap:
   publish_frequency: 3.0  # 每秒發佈 costmap 次數（Hz）
   always_send_full_costmap: true  # 每次都發送完整 costmap，而非只發送差異區域
   transform_tolerance: 1.0  # TF 座標容忍延遲秒數
-
-  static_map: false  # 不使用地圖伺服器的地圖（若為 true 則會載入 static_map topic）
   resolution: 0.03  # costmap 的解析度（每格代表 0.03 公尺）
   origin_x: 0.0  # costmap 左下角的 X 座標（原點位置）
   origin_y: 0.0  # costmap 左下角的 Y 座標
