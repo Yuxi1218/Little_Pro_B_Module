@@ -1,21 +1,13 @@
 <launch>
+  <!-- 添加必要的參數宣告 -->
+  <arg name="cmd_vel_topic" default="/cmd_vel"/>
+  <arg name="odom_topic" default="odom"/>
+  <arg name="move_forward_only" default="false"/>
+
   <!-- 啟動 Lidar，包含雷射掃描儀的驅動程式和相關設定 -->
   <include file="$(find ydlidar)/launch/X4_lidar.launch" />    
   <!-- 啟動 pibot 機器人，包含底盤、馬達和感測器的啟動 -->
   <include file="$(find pibot_bringup)/launch/bringup.launch" />   
-
-  <node pkg="move_base" type="move_base" name="move_base" output="screen">
-    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
-    <rosparam file="/home/saki/catkin_ws/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="/home/saki/catkin_ws/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
-    <rosparam file="/home/saki/catkin_ws/param/local_costmap_params.yaml" command="load" />
-    <rosparam file="/home/saki/catkin_ws/param/global_costmap_params.yaml" command="load" />
-    <rosparam file="/home/saki/catkin_ws/param/move_base_params.yaml" command="load" />
-    <rosparam file="/home/saki/catkin_ws/param/teb_local_planner_params.yaml" command="load" />
-
-    <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
-    <remap from="odom" to="$(arg odom_topic)"/>
-  </node>
 
   <!-- Use Hector SLAM instead of GMapping -->
   <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" output="screen">
@@ -51,6 +43,14 @@
     <param name="scan_topic" value="scan"/>
   </node>
 
+  <!-- 啟動 move_base，負責路徑規劃和運動控制 -->
+  <!-- move_base 的啟動檔案 -->
+  <include file="$(find Little_Pro_B_Module)/launch/move_base.launch">   
+    <arg name="cmd_vel_topic" value="$(arg cmd_vel_topic)"/>
+    <arg name="odom_topic" value="$(arg odom_topic)"/>
+    <arg name="move_forward_only" value="$(arg move_forward_only)"/>
+  </include>
+</launch>
   <!-- 啟動 move_base，負責路徑規劃和運動控制 -->
   <arg name="move_forward_only" default="false"/>
   <!-- move_base 的啟動檔案 -->
