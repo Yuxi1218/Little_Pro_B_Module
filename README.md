@@ -6,6 +6,13 @@
 因為這個很破的模組  
 還要出現在那個很雞巴(?的二階
 
+## 注意
+
+此專案應將Little_Pro_B_Module改名成catkin_ws  
+且使用者名稱應為saki  
+所以結構會長
+/home/saki/catkin_ws/*
+
 ## 代辦?
 
 1. 改用hector & 調整tf發布
