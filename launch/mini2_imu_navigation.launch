@@ -1,20 +1,21 @@
 <launch>
   
-  <include file="$(find ydlidar)/launch/X4_lidar.launch" />    <!-- 啟動 YDLidar X4 雷射雷達 -->
-  <include file="$(find pibot_bringup)/launch/bringup_with_imu.launch" />  <!-- 啟動 pibot 機器人，包含 IMU 感測器 -->
+  <include file="$(find ydlidar)/launch/X4_lidar.launch" />    
+  <include file="$(find pibot_bringup)/launch/bringup_with_imu.launch" />  
    
  
-  <arg name="map_file" default="/home/saki/catkin_ws/maps/0702.yaml"/>  <!-- 定義地圖檔案路徑參數，預設為 /home/mini2/catkin_ws/maps/0702.yaml -->
-  <arg name="move_forward_only" default="false"/> <!-- 定義是否只允許前進的參數，預設為 false (允許後退) -->
+  <arg name="map_file" default="/home/mini2/catkin_ws/maps/0702.yaml"/>  
+  <arg name="move_forward_only" default="false"/>
 
   <!-- Map server -->
-  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/> <!-- 啟動地圖伺服器，載入指定的地圖檔案 -->
+  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
 
   <!-- AMCL -->
-  <include file="/home/saki/catkin_ws/launch/amcl.launch"/> <!-- 啟動 AMCL (Adaptive Monte Carlo Localization) 定位演算法 -->
+  <include file="/home/mini2/catkin_ws/launch/amcl.launch"/>
+  
   <!-- move_base -->
-  <include file="/home/saki/catkin_ws/launch/move_base.launch">   <!-- 啟動 move_base 導航節點 -->
-    <arg name="move_forward_only" value="$(arg move_forward_only)"/> <!-- 設定 move_base 是否只允許前進 -->
+  <include file="/home/mini2/catkin_ws/launch/move_base.launch">   
+    <arg name="move_forward_only" value="$(arg move_forward_only)"/>
   </include>
   
 </launch>

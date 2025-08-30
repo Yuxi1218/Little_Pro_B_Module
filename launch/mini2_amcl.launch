@@ -1,14 +1,17 @@
 <launch>
 
-  <include file="$(find ydlidar)/launch/X4_lidar.launch" />    <!-- 啟動 YDLidar X4 雷射雷達 -->
-  <include file="$(find pibot_bringup)/launch/bringup.launch" />   <!-- 啟動 PiBot 機器人平台 -->
-
-  <!-- Map server --> <!-- 地圖伺服器 -->
-  <node pkg="map_server" name="map_server" type="map_server" args="/home/mini2/catkin_ws/maps/ai007.yaml"/> <!-- 啟動地圖伺服器節點 -->
-
-  <!-- AMCL --> <!-- AMCL 定位 (已註解) -->
-  <include file="/home/saki/catkin_ws/launch/amcl.launch"/> <!-- 啟動 AMCL 定位 -->
+  <include file="$(find ydlidar)/launch/X4_lidar.launch" />    
+  <include file="$(find pibot_bringup)/launch/bringup.launch" />   
+ 
+#  <arg name="map_file" default="/home/mini2/catkin_ws/maps/ai007.yaml"/>
   
-  <!-- node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop" output="screen"/ --> <!-- 啟動鍵盤遙控節點 (已註解) -->
+#  <!-- Map server -->
+#  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
+
+  <!-- AMCL -->
+  <include file="/home/mini2/catkin_ws/launch/amcl.launch"/>
+  
+  <!-- node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop" output="screen"/ -->
  
  </launch>
+    

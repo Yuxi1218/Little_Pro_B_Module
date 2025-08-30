@@ -1,49 +1,46 @@
 <launch>
-  <!-- Arguments - 基本參數設定 -->
-  <arg name="scan_topic"     default="scan"/>        <!-- 雷射掃描話題名稱 -->
-  <arg name="initial_pose_x" default="0.0"/>         <!-- 機器人初始位置 X 座標 -->
-  <arg name="initial_pose_y" default="0.0"/>         <!-- 機器人初始位置 Y 座標 -->
-  <arg name="initial_pose_a" default="0.0"/>         <!-- 機器人初始方向角度 -->
+  <!-- Arguments -->
+  <arg name="scan_topic"     default="scan"/>
+  <arg name="initial_pose_x" default="0.0"/>
+  <arg name="initial_pose_y" default="0.0"/>
+  <arg name="initial_pose_a" default="0.0"/>
   
-  <!-- AMCL - 自適應蒙特卡洛定位節點 -->
+  <!-- AMCL -->
   <node pkg="amcl" type="amcl" name="amcl">
 
-    <!-- 粒子濾波器相關參數 -->
-    <param name="min_particles"             value="500"/>     <!-- 最小粒子數量 -->
-    <param name="max_particles"             value="3000"/>    <!-- 最大粒子數量 -->
-    <param name="kld_err"                   value="0.02"/>    <!-- KLD採樣的誤差閾值 -->
-    <param name="update_min_d"              value="0.20"/>    <!-- 最小更新距離 (米) -->
-    <param name="update_min_a"              value="0.20"/>    <!-- 最小更新角度 (弧度) -->
-    <param name="resample_interval"         value="1"/>       <!-- 重採樣間隔 -->
-    <param name="transform_tolerance"       value="0.5"/>     <!-- 坐標轉換容忍時間 (秒) -->
-    <param name="recovery_alpha_slow"       value="0.00"/>    <!-- 慢速恢復係數 -->
-    <param name="recovery_alpha_fast"       value="0.00"/>    <!-- 快速恢復係數 -->
-    <param name="initial_pose_x"            value="$(arg initial_pose_x)"/>  <!-- 初始 X 位置 -->
-    <param name="initial_pose_y"            value="$(arg initial_pose_y)"/>  <!-- 初始 Y 位置 -->
-    <param name="initial_pose_a"            value="$(arg initial_pose_a)"/>  <!-- 初始角度 -->
-    <param name="gui_publish_rate"          value="50.0"/>    <!-- GUI 更新頻率 -->
+    <param name="min_particles"             value="500"/>
+    <param name="max_particles"             value="3000"/>
+    <param name="kld_err"                   value="0.02"/>
+    <param name="update_min_d"              value="0.20"/>
+    <param name="update_min_a"              value="0.20"/>
+    <param name="resample_interval"         value="1"/>
+    <param name="transform_tolerance"       value="0.5"/>
+    <param name="recovery_alpha_slow"       value="0.00"/>
+    <param name="recovery_alpha_fast"       value="0.00"/>
+    <param name="initial_pose_x"            value="$(arg initial_pose_x)"/>
+    <param name="initial_pose_y"            value="$(arg initial_pose_y)"/>
+    <param name="initial_pose_a"            value="$(arg initial_pose_a)"/>
+    <param name="gui_publish_rate"          value="50.0"/>
 
-    <!-- 雷射感測器模型參數 -->
-    <remap from="scan"                      to="$(arg scan_topic)"/>   <!-- 雷射話題重映射 -->
-    <param name="laser_max_range"           value="3.5"/>     <!-- 雷射最大有效距離 -->
-    <param name="laser_max_beams"           value="180"/>     <!-- 雷射光束最大數量 -->
-    <param name="laser_z_hit"               value="0.5"/>     <!-- 測量值命中權重 -->
-    <param name="laser_z_short"             value="0.05"/>    <!-- 短距離異常權重 -->
-    <param name="laser_z_max"               value="0.05"/>    <!-- 最大距離權重 -->
-    <param name="laser_z_rand"              value="0.5"/>     <!-- 隨機噪聲權重 -->
-    <param name="laser_sigma_hit"           value="0.2"/>     <!-- 測量值標準差 -->
-    <param name="laser_lambda_short"        value="0.1"/>     <!-- 短距離衰減係數 -->
-    <param name="laser_likelihood_max_dist" value="2.0"/>     <!-- 最大似然距離 -->
-    <param name="laser_model_type"          value="likelihood_field"/>  <!-- 雷射模型類型 -->
+    <remap from="scan"                      to="$(arg scan_topic)"/>
+    <param name="laser_max_range"           value="3.5"/>
+    <param name="laser_max_beams"           value="180"/>
+    <param name="laser_z_hit"               value="0.5"/>
+    <param name="laser_z_short"             value="0.05"/>
+    <param name="laser_z_max"               value="0.05"/>
+    <param name="laser_z_rand"              value="0.5"/>
+    <param name="laser_sigma_hit"           value="0.2"/>
+    <param name="laser_lambda_short"        value="0.1"/>
+    <param name="laser_likelihood_max_dist" value="2.0"/>
+    <param name="laser_model_type"          value="likelihood_field"/>
 
-    <!-- 里程計模型參數 -->
-    <param name="odom_model_type"           value="diff"/>    <!-- 差分驅動模型 -->
-    <param name="odom_alpha1"               value="0.1"/>     <!-- 旋轉引起的旋轉誤差 -->
-    <param name="odom_alpha2"               value="0.1"/>     <!-- 平移引起的旋轉誤差 -->
-    <param name="odom_alpha3"               value="0.1"/>     <!-- 平移引起的平移誤差 -->
-    <param name="odom_alpha4"               value="0.1"/>     <!-- 旋轉引起的平移誤差 -->
-    <param name="odom_frame_id"             value="odom"/>    <!-- 里程計坐標系名稱 -->
-    <param name="base_frame_id"             value="base_link"/><!-- 機器人本體坐標系名稱 -->
+    <param name="odom_model_type"           value="diff"/>
+    <param name="odom_alpha1"               value="0.1"/>
+    <param name="odom_alpha2"               value="0.1"/>
+    <param name="odom_alpha3"               value="0.1"/>
+    <param name="odom_alpha4"               value="0.1"/>
+    <param name="odom_frame_id"             value="odom"/>
+    <param name="base_frame_id"             value="base_link"/>
 
   </node>
 </launch>
