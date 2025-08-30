@@ -7,7 +7,7 @@
 
   <!-- move_base -->
   <group ns="robot_navigation">
-    <node pkg="move_base" type="move_base" respawn="false" name="move_base_node" output="screen"> 
+    <node pkg="move_base" type="move_base" respawn="false" name="$(anon move_base_node)" output="screen"> 
       <!-- Load common parameters -->
       <rosparam file="/home/saki/catkin_ws/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
       <rosparam file="/home/saki/catkin_ws/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
