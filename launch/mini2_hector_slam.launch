@@ -35,4 +35,7 @@
 
   </node>
   
+  <!-- 啟動 move_base -->
+  <include file="$(find Little_Pro_B_Module)/launch/move_base.launch" />
+
 </launch>
