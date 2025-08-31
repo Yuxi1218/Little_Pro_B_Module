@@ -1,29 +1,29 @@
-map_update_interval: 1.0    # 地圖更新間隔時間 (秒)
-maxUrange: 8.0             # 雷射掃描最大有效距離 (公尺)
-sigma: 0.05                # 端點匹配的標準差
-kernelSize: 1              # 使用的核心大小，用於掃描匹配
-lstep: 0.05                # 平移搜索步長 (公尺)
-astep: 0.05                # 角度搜索步長 (弧度)
-iterations: 5              # 掃描匹配的迭代次數
-lsigma: 0.075             # 地圖更新的高斯濾波器參數
-ogain: 3.0                # 判斷是否接受回環檢測的增益閾值
-lskip: 0                   # 每隔多少個雷射點處理一次，0表示處理所有點
-minimumScore: 50          # 接受掃描匹配的最小分數
-srr: 0.1                   # 里程計平移相對於平移的誤差
-srt: 0.2                   # 里程計平移相對於旋轉的誤差
-str: 0.1                   # 里程計旋轉相對於平移的誤差
-stt: 0.2                   # 里程計旋轉相對於旋轉的誤差
-linearUpdate: 1.0          # 機器人移動超過此距離才更新地圖 (公尺)
-angularUpdate: 0.2         # 機器人旋轉超過此角度才更新地圖 (弧度)
-temporalUpdate: 0.5        # 最小時間更新週期 (秒)
-resampleThreshold: 0.5     # 粒子重採樣閾值
-particles: 100             # 粒子濾波器使用的粒子數量
-xmin: -10.0               # 地圖 X 軸最小範圍 (公尺)
-ymin: -10.0               # 地圖 Y 軸最小範圍 (公尺)
-xmax: 10.0                # 地圖 X 軸最大範圍 (公尺)
-ymax: 10.0                # 地圖 Y 軸最大範圍 (公尺)
-delta: 0.05               # 地圖解析度 (公尺/像素)
-llsamplerange: 0.01       # 線性搜索範圍
-llsamplestep: 0.01        # 線性搜索步長
-lasamplerange: 0.005      # 角度搜索範圍
-lasamplestep: 0.005       # 角度搜索步長
+map_update_interval: 1.0
+maxUrange: 8.0
+sigma: 0.05
+kernelSize: 1
+lstep: 0.05
+astep: 0.05
+iterations: 5
+lsigma: 0.075
+ogain: 3.0
+lskip: 0
+minimumScore: 50
+srr: 0.1
+srt: 0.2
+str: 0.1
+stt: 0.2
+linearUpdate: 1.0
+angularUpdate: 0.2
+temporalUpdate: 0.5
+resampleThreshold: 0.5
+particles: 100
+xmin: -10.0
+ymin: -10.0
+xmax: 10.0
+ymax: 10.0
+delta: 0.05
+llsamplerange: 0.01
+llsamplestep: 0.01
+lasamplerange: 0.005
+lasamplestep: 0.005

@@ -1,10 +1,12 @@
 <launch>
+  <arg name="use_rviz" default="true" />
+
   <!-- Hector SLAM -->
   <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" output="screen">
     
     <!-- Frame names -->
     <param name="map_frame" value="map" />
-    <param name="base_frame" value="base_link" />
+    <param name="base_frame" value="base_footprint" />
     <param name="odom_frame" value="odom" />
     
     <!-- Tf use -->
@@ -35,7 +37,7 @@
 
   </node>
   
-  <!-- 啟動 move_base -->
-  <include file="/home/saki/catkin_ws/launch/move_base.launch" />
+  <!-- RViz -->
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find pibot_bringup)/rviz/gmapping.rviz" if="$(arg use_rviz)"/>
 
 </launch>
