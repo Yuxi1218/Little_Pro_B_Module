@@ -1,5 +1,16 @@
 # 安裝指南
 
+## 注意
+
+在你沒有做好準備前，以及確保你有很多時間  
+請勿使用此指南的方式構建你的環境  
+如你已經準備要使用此指南搭建  
+請記得使用[Raspberry Pi OS (Raspbian)](https://downloads.raspberrypi.org/raspbian/images/) 且 debian版本為Buster  
+而不是使用Ubuntu Server 20.04.6 LTS等版本  
+請記得，如果沒有萬全準備請使用楊版B模組環境
+
+---
+
 ## 先更新
 
 ~~我原本想寫不能先放調理包~~
