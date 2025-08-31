@@ -1,17 +1,9 @@
 <launch>
   <include file="$(find ydlidar)/launch/X4_lidar.launch" />
   <include file="$(find pibot_bringup)/launch/bringup.launch" />
-  
-  <arg name="map_file" default="/home/mini2/catkin_ws/maps/8.yaml"/>
-  <arg name="move_forward_only" default="false"/>
-  <param name="use_sim_time" value="false"/>
-  
-  <!-- Map server -->
-  <node pkg="map_server" name="map_server" type="map_server" args="$(arg map_file)"/>
-  
-  <!-- AMCL -->
-  <include file="/home/mini2/catkin_ws/launch/amcl.launch"/>
-  
+  <include file="/home/mini2/catkin_ws/launch/hector_slam.launch" />   
+
+
   <!-- move_base with TEB local planner -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
@@ -29,5 +21,5 @@
   </node>
   
   <!-- run MyGo.py -->
-  <node name="MyGo" pkg="test" type="MyGo.py" output="screen"/>
+  <node name="MyGo" pkg="tomorin" type="MyGo.py" output="screen"/>
 </launch>
