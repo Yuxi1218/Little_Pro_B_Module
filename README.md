@@ -9,14 +9,12 @@
 ## 注意
 
 此專案應將Little_Pro_B_Module改名成catkin_ws  
-且使用者名稱應為saki  
+且使用者名稱應為mini2  
 所以結構會長
-/home/saki/catkin_ws/*
+/home/mini2/catkin_ws/*
 
 ## 代辦?
 
-1. 改用hector & 調整tf發布
-    - 應確認地圖建立是否精準，並在鍵盤測試模擬實際數據是否穩定
-2. 改用teb
-    - teb不行就用dwa  
-3. teb計算出來的路線顯示在rviz的path上  
+* teb計算出來的路線顯示在rviz的path上  
+* 更好的模組化  
+* 完善的教學文檔 
