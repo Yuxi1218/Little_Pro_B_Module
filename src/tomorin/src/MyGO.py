@@ -13,13 +13,13 @@ from actionlib_msgs.msg import GoalStatusArray
 init_x = 0.3 - 0.3
 init_y = 0.3 - 0.3
 # 目標
-goal_x = 2.55
-goal_y = -3.23
+goal_x = 2.7
+goal_y = -0.7
 class MoveBaseWithEmergency:
     def __init__(self):
         self.btn = 17     # GPIO 17 = pin 11
-        self.ledG = 12    # GPIO 12 = pin 32
-        self.ledY = 26    # GPIO 26 = pin 37
+        self.ledG = 26    # GPIO 12 = pin 32
+        self.ledY = 12    # GPIO 26 = pin 37
         self.ledR = 16    # GPIO 16 = pin 36
 
         self.goal_sent = False
@@ -34,8 +34,8 @@ class MoveBaseWithEmergency:
         gpio.setup(self.ledR, gpio.OUT)
 
         gpio.output(self.ledG, gpio.HIGH)  # 系統啟動中
-        gpio.output(self.ledY, gpio.LOW)
-        gpio.output(self.ledR, gpio.LOW)
+        gpio.output(self.ledY, gpio.HIGH)
+        gpio.output(self.ledR, gpio.HIGH)
 
         # 發佈 initial pose
         self.init_pose_pub = rospy.Publisher("/initialpose", PoseWithCovarianceStamped, queue_size=1)
@@ -46,6 +46,7 @@ class MoveBaseWithEmergency:
         self.client.wait_for_server()
         rospy.loginfo("已連接 move_base")
         self.publish_initial_pose()
+        gpio.output(self.ledY, gpio.LOW)
 
         # 監聽 move_base 狀態
         rospy.Subscriber("/move_base/status", GoalStatusArray, self.move_base_status_callback)
@@ -72,8 +73,14 @@ class MoveBaseWithEmergency:
         pose_msg.pose.covariance[7] = 0.25
         pose_msg.pose.covariance[35] = 0.0685
 
+        gpio.output(self.ledR, gpio.LOW)
         self.init_pose_pub.publish(pose_msg)
         rospy.loginfo("初始位置已發佈：x=%.2f, y=%.2f, angle=%d°", init_x, init_y, theta_deg)
+        for i in range(5):
+            time.sleep(0.5)
+            gpio.output(self.ledG, gpio.LOW)
+            time.sleep(0.5)
+            gpio.output(self.ledG, gpio.HIGH)
 
     def send_goal(self):
         goal = MoveBaseGoal()
@@ -94,7 +101,7 @@ class MoveBaseWithEmergency:
         goal = MoveBaseGoal()
         goal.target_pose.header.frame_id = "base_link"  # 相對座標：前進 0.3 公尺
         goal.target_pose.header.stamp = rospy.Time.now()
-        goal.target_pose.pose.position.x = 0.3
+        goal.target_pose.pose.position.x = -0.1
         goal.target_pose.pose.orientation.w = 1.0
 
         self.client.send_goal(goal)
@@ -111,6 +118,9 @@ class MoveBaseWithEmergency:
         if latest_status == 4 and self.goal_sent and not self.goal_cancelled and not self.trying_forward:
             rospy.logwarn("導航失敗，嘗試前進修復")
             self.try_forward()
+            time.sleep(1)
+            self.client.send_goal(goal)
+
 
     def monitor_button(self):
         prev_state = gpio.input(self.btn)
